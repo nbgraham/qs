@@ -776,12 +776,15 @@ test('parse()', function (t) {
         }, {
             decoder: function (str, _, __, type) {
                 decoded.push({ val: str, type: type });
+                if (type === 'key') {
+                    return str + '$';
+                }
                 return str;
             }
         }), {
-            one: 1,
-            two: 'two',
-            three: true
+            one$: 1,
+            two$: 'two',
+            three$: true
         });
         st.deepEqual(decoded, [
             { val: 'one', type: 'key' },
